@@ -41,7 +41,7 @@ int main() {
 ---
 ```
 (let [int* arr (malloc (* (sizeof int) 3))
-      char c = 'c']
+      char c 'c']
   (set! (nth arr 0) 5)
   (set! (nth arr 1) 10)
   (set! (nth arr 2) 7)
