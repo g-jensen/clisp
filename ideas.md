@@ -1,3 +1,5 @@
+Different flags keep whitespace vs discard it during compilation.
+
 Client should be able to specify what words convert to functions call, lets, assignments, etc...
 
 Example:
@@ -38,16 +40,43 @@ int main() {
 ```
 ---
 ```
-(let [int* arr (malloc (* (sizeof int) 3))]
+(let [int* arr (malloc (* (sizeof int) 3))
+      char c = 'c']
   (set! (nth arr 0) 5)
   (set! (nth arr 1) 10)
-  (set! (nth arr 2) 7))
+  (set! (nth arr 2) 7)
+  (println c))
 ```
 =>
 ```
-int* arr = malloc(sizeof(int) * 3);
-arr[0] = 5;
-arr[1] = 10;
-arr[2] = 7;
+{
+  int* arr = malloc(sizeof(int) * 3);
+  char c = 'c';
+  arr[0] = 5;
+  arr[1] = 10;
+  arr[2] = 7;
+  println(c);
+}
 ```
 ---
+Needs more thought:
+```
+(struct Point
+  {int (set! x 10)
+   int y})
+
+(def (struct Point my-point) [5 3])
+
+(typedef (struct Point) Point)
+```
+=>
+```
+struct Point {
+  int x = 10;
+  int y;
+}
+
+struct Point my_point = {5, 3};
+
+typedef struct Point Point;
+```
